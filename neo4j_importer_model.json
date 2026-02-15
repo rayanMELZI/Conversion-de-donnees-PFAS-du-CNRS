@@ -1,0 +1,761 @@
+{
+  "version": "3.0.0",
+  "visualisation": {
+    "nodes": [
+      {
+        "id": "n:0",
+        "position": {
+          "x": -5.840870623865743,
+          "y": 85.83550889366947
+        }
+      },
+      {
+        "id": "n:1",
+        "position": {
+          "x": -71.30061922369475,
+          "y": -48.53747795331475
+        }
+      },
+      {
+        "id": "n:2",
+        "position": {
+          "x": 77.29879749169389,
+          "y": -37.3216516991703
+        }
+      }
+    ]
+  },
+  "dataModel": {
+    "version": "3.0",
+    "graphSchemaRepresentation": {
+      "version": "1.0.0",
+      "graphSchema": {
+        "nodeLabels": [
+          {
+            "$id": "nl:0",
+            "token": "Measurement",
+            "properties": [
+              {
+                "$id": "p:0_0",
+                "token": "meas_id",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:0_2",
+                "token": "date",
+                "type": {
+                  "type": "datetime"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:0_3",
+                "token": "matrix",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:0_4",
+                "token": "pfasSum",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:0_5",
+                "token": "unit",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              }
+            ]
+          },
+          {
+            "$id": "nl:1",
+            "token": "Site",
+            "properties": [
+              {
+                "$id": "p:1_0",
+                "token": "siteId",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_1",
+                "token": "nodeLabel",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_2",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_3",
+                "token": "city",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_4",
+                "token": "country",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_5",
+                "token": "status",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_6",
+                "token": "closureYear",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_7",
+                "token": "pfasProduced",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_8",
+                "token": "lastChecked",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_9",
+                "token": "sector",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_10",
+                "token": "lat",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": false
+              },
+              {
+                "$id": "p:1_11",
+                "token": "lon",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": false
+              }
+            ]
+          },
+          {
+            "$id": "nl:2",
+            "token": "Substance",
+            "properties": [
+              {
+                "$id": "p:2_0",
+                "token": "name",
+                "type": {
+                  "type": "string"
+                },
+                "nullable": false
+              }
+            ]
+          }
+        ],
+        "relationshipTypes": [
+          {
+            "$id": "rt:0",
+            "token": "DETECTED_SUBSTANCE",
+            "properties": [
+              {
+                "$id": "p:0_0",
+                "token": "value",
+                "type": {
+                  "type": "float"
+                },
+                "nullable": false
+              }
+            ]
+          },
+          {
+            "$id": "rt:1",
+            "token": "PRODUCES_SUBSTANCE",
+            "properties": []
+          },
+          {
+            "$id": "rt:2",
+            "token": "TAKEN_AT_SITE",
+            "properties": []
+          }
+        ],
+        "nodeObjectTypes": [
+          {
+            "$id": "n:0",
+            "labels": [
+              {
+                "$ref": "#nl:0"
+              }
+            ]
+          },
+          {
+            "$id": "n:1",
+            "labels": [
+              {
+                "$ref": "#nl:1"
+              }
+            ]
+          },
+          {
+            "$id": "n:2",
+            "labels": [
+              {
+                "$ref": "#nl:2"
+              }
+            ]
+          }
+        ],
+        "relationshipObjectTypes": [
+          {
+            "$id": "r:0",
+            "type": {
+              "$ref": "#rt:0"
+            },
+            "from": {
+              "$ref": "#n:0"
+            },
+            "to": {
+              "$ref": "#n:2"
+            }
+          },
+          {
+            "$id": "r:1",
+            "type": {
+              "$ref": "#rt:1"
+            },
+            "from": {
+              "$ref": "#n:1"
+            },
+            "to": {
+              "$ref": "#n:2"
+            }
+          },
+          {
+            "$id": "r:2",
+            "type": {
+              "$ref": "#rt:2"
+            },
+            "from": {
+              "$ref": "#n:0"
+            },
+            "to": {
+              "$ref": "#n:1"
+            }
+          }
+        ],
+        "constraints": [
+          {
+            "$id": "c:1",
+            "name": "siteId_Site_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:1"
+            },
+            "relationshipType": null,
+            "properties": [
+              {
+                "$ref": "#p:1_0"
+              }
+            ]
+          },
+          {
+            "$id": "c:2",
+            "name": "name_Substance_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:2"
+            },
+            "relationshipType": null,
+            "properties": [
+              {
+                "$ref": "#p:2_0"
+              }
+            ]
+          },
+          {
+            "$id": "c:3",
+            "name": "meas_id_Measurement_uniq",
+            "constraintType": "uniqueness",
+            "entityType": "node",
+            "nodeLabel": {
+              "$ref": "#nl:0"
+            },
+            "properties": [
+              {
+                "$ref": "#p:0_0"
+              }
+            ]
+          }
+        ],
+        "indexes": []
+      }
+    },
+    "graphSchemaExtensionsRepresentation": {
+      "nodeKeyProperties": [
+        {
+          "node": {
+            "$ref": "#n:0"
+          },
+          "keyProperties": [
+            {
+              "$ref": "#p:0_0"
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:1"
+          },
+          "keyProperties": [
+            {
+              "$ref": "#p:1_0"
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:2"
+          },
+          "keyProperties": [
+            {
+              "$ref": "#p:2_0"
+            }
+          ]
+        }
+      ]
+    },
+    "graphMappingRepresentation": {
+      "dataSourceSchema": {
+        "type": "local",
+        "tableSchemas": [
+          {
+            "expanded": true,
+            "fields": [
+              {
+                "name": "meas_id",
+                "sample": "meas_12622",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "substance",
+                "sample": "PFOA",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "value",
+                "sample": "90.0",
+                "recommendedType": {
+                  "type": "float"
+                }
+              }
+            ],
+            "name": "edges_detections.csv"
+          },
+          {
+            "expanded": true,
+            "fields": [
+              {
+                "name": "site_id",
+                "sample": "solvay_47.056373",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "substance",
+                "sample": "PVDF",
+                "recommendedType": {
+                  "type": "string"
+                }
+              }
+            ],
+            "name": "edges_production_direct.csv"
+          },
+          {
+            "expanded": true,
+            "fields": [
+              {
+                "name": "meas_id",
+                "sample": "meas_12622",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "site_id",
+                "sample": "maes_50.808932",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "date",
+                "sample": "",
+                "recommendedType": {
+                  "type": "datetime"
+                }
+              },
+              {
+                "name": "matrix",
+                "sample": "Surface water",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "pfas_sum",
+                "sample": "130.0",
+                "recommendedType": {
+                  "type": "float"
+                }
+              },
+              {
+                "name": "unit",
+                "sample": "ng/l",
+                "recommendedType": {
+                  "type": "string"
+                }
+              }
+            ],
+            "name": "nodes_measurements.csv"
+          },
+          {
+            "expanded": true,
+            "fields": [
+              {
+                "name": "site_id",
+                "sample": "fortier_beaulieu_45.864286",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "node_labels",
+                "sample": "Site:KnownUser",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "name",
+                "sample": "Fortier Beaulieu",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "city",
+                "sample": "Rumilly",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "country",
+                "sample": "France",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "status",
+                "sample": "Unknown",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "closure_year",
+                "sample": "",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "pfas_produced",
+                "sample": "",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "last_checked",
+                "sample": "",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "sector",
+                "sample": "",
+                "recommendedType": {
+                  "type": "string"
+                }
+              },
+              {
+                "name": "lat",
+                "sample": "45.864286",
+                "recommendedType": {
+                  "type": "float"
+                }
+              },
+              {
+                "name": "lon",
+                "sample": "5.948318",
+                "recommendedType": {
+                  "type": "float"
+                }
+              }
+            ],
+            "name": "nodes_sites_clean.csv"
+          },
+          {
+            "expanded": true,
+            "fields": [
+              {
+                "name": "name",
+                "sample": "Sulfoxaflor",
+                "recommendedType": {
+                  "type": "string"
+                }
+              }
+            ],
+            "name": "nodes_substances.csv"
+          }
+        ]
+      },
+      "nodeMappings": [
+        {
+          "node": {
+            "$ref": "#n:0"
+          },
+          "tableName": "nodes_measurements.csv",
+          "propertyMappings": [
+            {
+              "property": {
+                "$ref": "#p:0_0"
+              },
+              "fieldName": "meas_id"
+            },
+            {
+              "property": {
+                "$ref": "#p:0_2"
+              },
+              "fieldName": "date"
+            },
+            {
+              "property": {
+                "$ref": "#p:0_3"
+              },
+              "fieldName": "matrix"
+            },
+            {
+              "property": {
+                "$ref": "#p:0_4"
+              },
+              "fieldName": "pfas_sum"
+            },
+            {
+              "property": {
+                "$ref": "#p:0_5"
+              },
+              "fieldName": "unit"
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:1"
+          },
+          "tableName": "nodes_sites_clean.csv",
+          "propertyMappings": [
+            {
+              "property": {
+                "$ref": "#p:1_0"
+              },
+              "fieldName": "site_id"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_1"
+              },
+              "fieldName": "node_labels"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_2"
+              },
+              "fieldName": "name"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_3"
+              },
+              "fieldName": "city"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_4"
+              },
+              "fieldName": "country"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_5"
+              },
+              "fieldName": "status"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_6"
+              },
+              "fieldName": "closure_year"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_7"
+              },
+              "fieldName": "pfas_produced"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_8"
+              },
+              "fieldName": "last_checked"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_9"
+              },
+              "fieldName": "sector"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_10"
+              },
+              "fieldName": "lat"
+            },
+            {
+              "property": {
+                "$ref": "#p:1_11"
+              },
+              "fieldName": "lon"
+            }
+          ]
+        },
+        {
+          "node": {
+            "$ref": "#n:2"
+          },
+          "tableName": "nodes_substances.csv",
+          "propertyMappings": [
+            {
+              "property": {
+                "$ref": "#p:2_0"
+              },
+              "fieldName": "name"
+            }
+          ]
+        }
+      ],
+      "relationshipMappings": [
+        {
+          "relationship": {
+            "$ref": "#r:0"
+          },
+          "tableName": "edges_detections.csv",
+          "fromMappings": {
+            "#p:0_0": "meas_id"
+          },
+          "toMappings": {
+            "#p:2_0": "substance"
+          },
+          "propertyMappings": [
+            {
+              "property": {
+                "$ref": "#p:0_0"
+              },
+              "fieldName": "value"
+            }
+          ]
+        },
+        {
+          "relationship": {
+            "$ref": "#r:1"
+          },
+          "tableName": "edges_production_direct.csv",
+          "fromMappings": {
+            "#p:1_0": "site_id"
+          },
+          "toMappings": {
+            "#p:2_0": "substance"
+          },
+          "propertyMappings": []
+        },
+        {
+          "relationship": {
+            "$ref": "#r:2"
+          },
+          "tableName": "nodes_measurements.csv",
+          "fromMappings": {
+            "#p:0_0": "site_id"
+          },
+          "toMappings": {
+            "#p:1_0": "site_id"
+          },
+          "propertyMappings": []
+        }
+      ]
+    },
+    "configurations": {
+      "idsToIgnore": []
+    }
+  }
+}
