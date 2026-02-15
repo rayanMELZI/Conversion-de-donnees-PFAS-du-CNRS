@@ -1,0 +1,189 @@
+Le Score d'Impact ($I_k$) – La Densité de Données
+MATCH (s:IndustrialSite)-[:REPORTED_EMISSION]->(m:Sample)
+WITH s, count(m) AS nb_prelevements
+SET s.impact_score = log(10 + nb_prelevements)
+RETURN s.name, nb_prelevements, s.impact_score
+ORDER BY s.impact_score DESC
+
+"ZaCh System SA - Rejet 2 - Eaux industrielles (Aval)"
+267
+5.6240175061873385
+2
+"CHEMOURS France - R850 (Aval)"
+164
+5.159055299214529
+3
+"GIE CHIMIE SALINDRES - rejets step (Aval)"
+139
+5.003946305945459
+4
+"CHEMOURS France - R831 (Aval)"
+99
+4.6913478822291435
+5
+"CHEMOURS France - R832 (Aval)"
+88
+4.584967478670572
+6
+"TOTALENERGIES RAFFINAGE FRANCE - Réseau TER Eaux résiduaires (Aval)"
+84
+4.543294782270004
+7
+"BUTACHIMIE - Eau de forage (Amont)"
+81
+4.51085950651685
+8
+"CNPP ENTREPRISE - Rejet 1 eaux résiduaires (Aval)"
+79
+4.48863636973214
+9
+"REVIVAL - EP (Aval)"
+78
+4.477336814478207
+10
+"SUEZ RV NORD EST - Bassin lixiviats (Aval)"
+78
+4.477336814478207
+
+
+
+
+
+
+4.2 Étape 2 : Le Score Textuel ($T_k$) – La Réputation
+MATCH (s:IndustrialSite)
+WITH s, (CASE 
+    WHEN toLower(s.name) CONTAINS 'arkema' OR toLower(s.name) CONTAINS 'daikin' THEN 5 
+    WHEN s.source_text CONTAINS 'DREAL' THEN 2 
+    ELSE 0 END) AS Tk
+SET s.textual_score = Tk
+
+"ARKEMA Mourenx - Rejet eaux Biodégradables (Aval)"
+5
+2
+"ARKEMA Mont - Emissaire 3 (Aval)"
+5
+3
+"ARKEMA FRANCE SA - Huveaune (Aval)"
+5
+4
+"ARKEMA Mourenx - Rejet1 eaux pluviales (Aval)"
+5
+5
+"ARKEMA Lacq - Rejet 1 - Point L (Aval)"
+5
+6
+"ARKEMA Mont - Emissaire 2 (Aval)"
+5
+7
+"ARKEMA - N 1 (rejet lagunes) (Aval)"
+5
+8
+"ARKEMA - rejet caniveau 30 (Aval)"
+5
+9
+"ARKEMA FRANCE SA - STEP_Mlle (Aval)"
+5
+10
+"ARKEMA Mont - Emissaire 1 (eaux pluviales) (Aval)"
+
+4.3 Étape 3 : Agrégation et Score d'Évidence Final ($S_k$
+
+MATCH (s:IndustrialSite)
+WHERE s.impact_score IS NOT NULL
+WITH s, (0.4 * coalesce(s.textual_score, 0) + 0.6 * s.impact_score) AS Sk
+SET s.total_evidence_score = Sk
+RETURN s.name, s.total_evidence_score
+ORDER BY s.total_evidence_score DESC
+
+"ARKEMA FRANCE - STEA (Aval)"
+4.370746231148857
+3.9512437185814275
+5
+2
+"ARKEMA FRANCE - Fosse de relevage (Aval)"
+4.347213803256888
+3.912023005428146
+5
+3
+"ARKEMA FRANCE - PERRIER (Aval)"
+4.2133276724683615
+3.6888794541139363
+5
+4
+"ZaCh System SA - Rejet 2 - Eaux industrielles (Aval)"
+4.174410503712403
+5.6240175061873385
+2
+5
+"CHEMOURS France - R850 (Aval)"
+3.895433179528718
+5.159055299214529
+2
+
+4.4 Validation par la "Trace" (Concentration Maximale)
+
+
+MATCH (s:IndustrialSite)-[:REPORTED_EMISSION]->(m:Sample)
+WHERE s.total_evidence_score > 3.0
+RETURN s.name, s.total_evidence_score, max(m.pfas_sum) AS Max_Concentration
+
+
+105
+"SITA Nord Est SAS - Lagune lixiviat (Aval)"
+3.0426017709700206
+1800.0
+106
+"3M FRANCE - OA401381 * rejet n°2 eaux usées (Aval)"
+3.135092178866376
+970.0
+107
+"ARKEMA FRANCE - OA401836 PK4050 (Aval)"
+3.538969614476922
+0.0
+108
+"ARKEMA FRANCE - OA401837 PK4330 (Aval)"
+3.538969614476922
+0.0
+109
+"SUEZ RV NORD-EST - CSD CURGIES - Lixiviats bruts (Aval)"
+3.028143240022585
+7700.0
+110
+"PPG FRANCE MANUFACTURING - OA401855 (Aval)"
+3.0426017709700206
+1000.0
+111
+"SITA NORD EST - Bassin lixiviats (Aval)"
+3.1227206065447346
+2700.0
+112
+"MALAQUIN - ISDND de Saint-Amand-les-Eaux - Bassin lixiviat (Aval)"
+3.1227206065447346
+900.0
+113
+"SOTRENOR - Rejet canal de la Souchez (Aval)"
+3.135092178866376
+3300.0
+114
+"SITA NORD - Lixiviats (Aval)"
+3.0705137803509563
+2200.0
+115
+"SUEZ RV NORD EST - Lixiviat brut (Aval)"
+3.028143240022585
+4500.0
+116
+"SOCIETE PIERRE BRABANT - Rejet 1 (Aval)"
+3.1100885610260347
+4750.0
+117
+"FEUTRIE SA - OA401773 rejet (Aval)"
+3.22583076070073
+5400.0
+118
+"GALLOO FRANCE Division Halluin - OA1CONNU rejet n°1EAUX RECEUILLIES (Aval)"
+3.0133276724683613
+2300.0
+
+
